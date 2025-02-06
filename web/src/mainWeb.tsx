@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-// const api_key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-const api_key = "AIzaSyDvZ-9y4VdZzZ6Q6o5V1Q7wZI0t4s3Q5JY";
+const api_key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+
 
 export default function MainPage() {
     const [street, setStreet] = useState("");
