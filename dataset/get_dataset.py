@@ -1,132 +1,167 @@
-import os
 import random
 import time
-import requests  # Using requests instead of urllib for easier handling
-from time import sleep
-from dotenv import load_dotenv
+import asyncio
+import aiohttp
 import os
+from dotenv import load_dotenv
 
-# Load environment variables
-load_dotenv("../web/.env.local")  # Path to your .env.local file
-api_key = os.getenv("REACT_APP_GOOGLE_MAPS_API_KEY")
+# Load environment variables from the .env.local file in the ../web directory
+dotenv_path = os.path.join(os.path.dirname(__file__), '../web/.env.local')
+load_dotenv(dotenv_path)
 
-# Function to generate coordinates within the grid's specific bounds
-def generate_coords_within_grid(grid):
-    lat_min, lon_min = grid["bottom_right"]
-    lat_max, lon_max = grid["top_left"]
+# Retrieve the API key from the environment variable
+api_key = os.getenv('REACT_APP_GOOGLE_MAPS_API_KEY')
 
-    # Generate coordinates within the specific grid's bounds
-    lat = random.uniform(lat_min, lat_max)
-    lon = random.uniform(lon_min, lon_max)
-    return lat, lon
-
-# Function to get metadata of the generated coordinates
-def get_metadata(coords):
-    metadata_URL = f"https://maps.googleapis.com/maps/api/streetview/metadata?key={api_key}&location={coords[0]},{coords[1]}"
-    metadata = requests.get(metadata_URL).json()  # Using requests to get the metadata
-    return metadata["status"] == "OK"
-
-# Function to generate the grid structure
+# Function to generate grids (10 columns, 7 rows grid)
 def generate_grids(top_left, bottom_right):
-    # Create a 10x7 grid
     top_left_lat, top_left_lon = top_left
     bottom_right_lat, bottom_right_lon = bottom_right
 
     lat_diff = top_left_lat - bottom_right_lat
     lon_diff = top_left_lon - bottom_right_lon
 
-    lat_diff_per_grid = lat_diff / 7
-    lon_diff_per_grid = lon_diff / 10
+    lat_diff_per_grid = abs(lat_diff / 7)
+    lon_diff_per_grid = abs(lon_diff / 10)
 
-    grids = {}
+    return_grid = {}
+
+    # alaska - top left (71.633799, -167.538186) - bottom right (57.589583, -141.216646)
+    # hawaii - top left (22.384843, -160.323120) - bottom right (18.895523, -154.830471)
+    folder_name = os.path.join("./", "grid-alaska")
+    folder = [(filename.removesuffix(".jpg")) for filename in os.listdir(folder_name) if filename.endswith(".jpg")]
+    return_grid["alaska"] = {
+        "top_left_corner": (71.633799, -167.538186),
+        "bottom_right_corner": (57.589583, -141.216646),
+        "coords": folder
+    }
+
+    folder_name = os.path.join("./", "grid-hawaii")
+    folder = [(filename.removesuffix(".jpg")) for filename in os.listdir(folder_name) if filename.endswith(".jpg")]
+    return_grid["hawaii"] = {
+        "top_left_corner": (22.384843, -160.323120),
+        "bottom_right_corner": (18.895523, -154.830471),
+        "coords": folder
+    }
+
     for i in range(7):
         for j in range(10):
-            grids[f"{i}-{j}"] = {
-                "top_left": (top_left_lat - lat_diff_per_grid * i, top_left_lon + lon_diff_per_grid * j),
-                "bottom_right": (bottom_right_lat - lat_diff_per_grid * i, bottom_right_lon + lon_diff_per_grid * j),
-                "coords": []
+            folder_name = os.path.join("./", f"grid-{i}-{j}")
+            folder = [(filename.removesuffix(".jpg")) for filename in os.listdir(folder_name) if filename.endswith(".jpg")]
+            return_grid[f"{i}-{j}"] = {
+                "top_left_corner": (top_left_lat - lat_diff_per_grid * i, top_left_lon + lon_diff_per_grid * j),
+                "bottom_right_corner": (top_left_lat - lat_diff_per_grid * (i + 1), top_left_lon + lon_diff_per_grid * (j + 1)),
+                "coords": folder
             }
-    return grids
 
-# Function to create the directory if it doesn't exist
-def create_directory(directory):
-    if not os.path.exists(directory):
-        os.makedirs(directory)
+    return return_grid
 
-# Function to save the image based on coordinates
-def save_image(coords, grid_name):
-    # Create the grid folder if it doesn't exist
-    grid_folder = os.path.join("../", f"grid-{grid_name}")
-    create_directory(grid_folder)
+# Function to generate random coordinates within the grid
+def generate_coords(top_left, bottom_right):
+    lat = random.uniform(bottom_right[0], top_left[0])
+    lon = random.uniform(top_left[1], bottom_right[1])
+    return lat, lon
 
-    # Prepare the file name using the coordinates
-    lat, lon = coords
-    image_name = f"{lat},{lon}.jpg"
-    image_path = os.path.join(grid_folder, image_name)
+# Function to get metadata (check if location exists)
+async def get_metadata(session, coords):
+    metadata_URL = f"https://maps.googleapis.com/maps/api/streetview/metadata?key={api_key}&source=outdoor&location={coords[0]},{coords[1]}"
+    async with session.get(metadata_URL) as response:
+        metadata = await response.json()
+        return metadata["status"] == "OK"
 
-    # Check if the image already exists, if it does, don't overwrite
-    if not os.path.exists(image_path):
-        streetview_URL = f"https://maps.googleapis.com/maps/api/streetview?size=600x300&location={lat},{lon}&key={api_key}"
-        img_data = requests.get(streetview_URL).content
-        with open(image_path, "wb") as img_file:
-            img_file.write(img_data)
-        print(f"Saved image: {image_path}")
-    else:
-        print(f"Image already exists: {image_path}")
+# Function to get and save street view image
+async def get_streetview_image(session, coords, grid_id, base_dir = "./"):
+    streetview_URL = f"https://maps.googleapis.com/maps/api/streetview?size=600x300&location={coords[0]},{coords[1]}&source=outdoor&key={api_key}"
+    
+    # Send request for the image
+    async with session.get(streetview_URL) as response:
+        if response.status == 200:
+            img_data = await response.read()
+            
+            # Use latitude, longitude as filename (remove any characters that might cause issues)
+            lat, lon = coords
+            filename = f"{lat},{lon}.jpg"
+            filepath = os.path.join(base_dir, f"grid-{grid_id}", filename)
 
-# Function to count how many images have been downloaded
-def count_downloaded_images(base_dir="../grid-"):
-    image_count = 0
-    if os.path.exists(base_dir):
-        for folder in os.listdir(base_dir):
-            folder_path = os.path.join(base_dir, folder)
-            if os.path.isdir(folder_path) and folder.startswith("grid"):
-                for file in os.listdir(folder_path):
-                    if file.endswith(".jpg"):
-                        image_count += 1
-    return image_count
+            # Check if the image already exists, and skip if it does
+            if os.path.exists(filepath):
+                print(f"Image for {coords} already exists: Skipping.")
+                return
+            
+            # Save the image as a JPG file
+            with open(filepath, "wb") as f:
+                f.write(img_data)
+            print(f"Saved image for {grid_id} | {coords}: {filename}")
+        else:
+            print(f"Failed to get image for {coords}")
 
-# Main function to execute the entire process
-def main():
+# Process each grid to gather valid coordinates and save images
+async def process_grid(session, grid_id, top_left, bottom_right, limit_per_grid, grid_coords, recorded_locations, base_dir="./"):
+    grid_folder = os.path.join("./", f"grid-{grid_id}")
+    grid_folder_length = len(os.listdir(grid_folder))
+    valid_coords_count = grid_folder_length
+    invalid_coords_count = 0
+
+    while valid_coords_count < limit_per_grid:
+
+        generated_coords = generate_coords(top_left, bottom_right)
+
+        if generated_coords in recorded_locations:
+            continue
+
+        # Check if it's a valid location
+        if invalid_coords_count > 10000:
+            print(f"Skipping grid {grid_id} due to too many invalid locations.")
+            return  # Skip this grid entirely
+
+        if await get_metadata(session, generated_coords):
+            valid_coords_count += 1
+            invalid_coords_count = 0
+            recorded_locations.add(generated_coords)
+            
+            # Save the street view image (always to grid-0-0)
+            await get_streetview_image(session, generated_coords, grid_id)
+
+            # Delay between requests to avoid API rate limits
+            await asyncio.sleep(0.5)  # 0.5 second delay
+            
+            grid_coords[f"{grid_id}"]["coords"].append(generated_coords)
+        else:
+            invalid_coords_count += 1
+
+# Main function for managing the async tasks
+async def main():
     top_left = (49.049081, -125.450687)
     bottom_right = (24.455005, -67.343249)
 
-    # Generate grid coordinates
+    recorded_locations = set()  # Use a set to track unique locations
     grid_coords = generate_grids(top_left, bottom_right)
 
-    limit_per_grid = 200
-    recorded_locations = set()
+    limit_per_grid = 225
 
-    # Iterate through all grid cells
-    for grid_name, grid_info in grid_coords.items():
-        valid_coords_count = 0
-        invalid_coords_count = 0
-
-        while valid_coords_count < limit_per_grid:
-            generated_coords = generate_coords_within_grid(grid_info)
-
-            # Skip if coordinates already recorded
-            if generated_coords in recorded_locations:
-                continue
-
-            # Check metadata for validity
-            if get_metadata(generated_coords):
-                valid_coords_count += 1
-                recorded_locations.add(generated_coords)
-                save_image(generated_coords, grid_name)
-                print(f"Successfully saved image at {generated_coords}")
+    # Use async session to manage all API requests
+    async with aiohttp.ClientSession() as session:
+        tasks = []
+        for grid_id in grid_coords:
+            grid_folder = os.path.join("./", f"grid-{grid_id}")
+            grid_folder_length = len(os.listdir(grid_folder))
+            if grid_folder_length < limit_per_grid and grid_folder_length != 0:
+                task = asyncio.create_task(process_grid(session, 
+                                                        grid_id, 
+                                                        grid_coords[grid_id]["top_left_corner"], 
+                                                        grid_coords[grid_id]["bottom_right_corner"], 
+                                                        limit_per_grid, 
+                                                        grid_coords, 
+                                                        recorded_locations))
+                tasks.append(task)
             else:
-                invalid_coords_count += 1
+                print("Quota filled for grid ", grid_id)
 
-            # If 5000 invalid coordinates have been reached, skip the grid
-            if invalid_coords_count > 5000:
-                print(f"Skipping grid {grid_name}, too many invalid coordinates.")
-                break
+        # Wait for all tasks to finish
+        await asyncio.gather(*tasks)
 
-            # Sleep for a second to avoid hitting the API limit
-            sleep(1)
-
-        print(f"Finished grid {grid_name} with {valid_coords_count} images.")
-
+    # Optionally, print the results
+    for grid_id, grid_data in grid_coords.items():
+        print(f"Grid {grid_id} - {len(grid_data['coords'])} valid locations found.")
+    
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
