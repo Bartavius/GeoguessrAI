@@ -1,0 +1,14 @@
+.street-view-box {
+    height: 100vh; /* Set desired height */
+    overflow: hidden; /* Hide overflowing parts */
+    position: relative; /* Establish a positioning context */
+     /* Just for visualization */
+}
+
+.street-view-box .street-view-embed iframe {
+    position: absolute;
+    top: -80px; /* Adjust this to shift the visible portion */
+    border: none; 
+    height: 100%;
+    width: 100%;
+}
