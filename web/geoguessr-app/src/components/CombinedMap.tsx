@@ -5,7 +5,7 @@ export default function CombinedMap() {
     return (
         <div className="map-over-street-view">
             <StreetView />
-            <div style={{"position" : "absolute", "zIndex" : "100", "bottom": 20, "right": 0}}>
+            <div style={{"position" : "absolute",  "bottom": "10%", "right": "1%"}}>
             <BasicMap /></div>
         </div>
     )
