@@ -1,7 +1,7 @@
 import "./Streetview.css";
 
 export default function StreetView() {
-  const API_KEY = "AIzaSyAWG4QkqvAc1vTXbnhNko7jA05SqvqWnrg";
+  const API_KEY = process.env.NEXT_PUBLIC_STREET_VIEW_API;
   const lat = 42.345446;
   const lng = -71.081856;
   return (

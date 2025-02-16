@@ -1,4 +1,4 @@
-const API_KEY = process.env.NEXT_PUBLIC_STREET_VIEW_API;
+const API_KEY = process.env.NEXT_PUBLIC_MAP_API;
 
 export default {
     maptiler: {

@@ -1,9 +1,14 @@
 import BasicMap from "@/components/BasicMap";
+import CombinedMap from "@/components/CombinedMap";
 import StreetView from "@/components/Streeview";
 export default function Game() {
   return (
     <div>
       Game
+
+      <hr />
+
+      <CombinedMap />
 
       <hr />
 
