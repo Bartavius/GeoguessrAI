@@ -1,14 +1,34 @@
-import BasicMap from "@/components/BasicMap";
+"use client";
+
 import CombinedMap from "@/components/CombinedMap";
-import StreetView from "@/components/Streeview";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
 export default function Game() {
+
+  const [lat, setLat] = useState<number>();
+  const [lng, setLng] = useState<number>();
+
+  const router = useRouter();
+
+  const submitGuess = () => {
+    if (lat !== null && lng !== null) {
+      router.push(`/game/result?userLat=${lat}&userLng=${lng}`);
+    } else {
+      router.push(`/game/result?userLat=null&userLng=null`);
+    }
+  };
+
   return (
     <div>
       Game
       <hr />
-      <div className="m-20 border-4" style={{"overflow": "hidden", "position": "relative"}}>
-        <CombinedMap />
+      <div className="combined-map-container border-4">
+        <CombinedMap setLat={setLat} setLng={setLng} />
+        <button onClick={submitGuess} className=" m-2 mr-5 float-end bg-green-600 pl-40 pr-40 pt-2 pb-2 rounded-full border transition duration-150 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-green-700"><b>Submit</b></button>
+        <p>{lat} {lng}</p>
       </div>
+      
     </div>
   );
 }

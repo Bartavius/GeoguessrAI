@@ -6,7 +6,7 @@ import L, { LatLngLiteral } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import osm from "../utils/leaflet";
 
-const BasicMap = () => {
+const BasicMapWithMarker = ({setLat, setLng}: {setLat: (n: number) => void, setLng: (n: number) => void}) => {
 
   const [markerPosition, setMarkerPosition] = useState<LatLngLiteral | null>(
     null
@@ -17,9 +17,9 @@ const BasicMap = () => {
   const mapRef = useRef(null);
 
   const customIcon = L.icon({
-    iconUrl: "/user-guess.png",
-    iconSize: [38, 38],
-    iconAnchor: [19, 38],
+    iconUrl: "/user-marker.webp",
+    iconSize: [25, 25],
+    iconAnchor: [12.5, 25],
   });
 
   interface LocationMarkerProps {
@@ -27,12 +27,12 @@ const BasicMap = () => {
   }
 
   function LocationMarker({ setMarkerPosition }: LocationMarkerProps) {
-    // useMapEvents is dynamically imported so TS might complain.
-    // You can cast the result if needed.
     useMapEvents({
       click(e) {
         const { lat, lng } = e.latlng;
         console.log("Marker dropped at:", lat, lng);
+        setLat(lat);
+        setLng(lng);
         setMarkerPosition({ lat, lng });
       },
     });
@@ -51,9 +51,9 @@ const BasicMap = () => {
         {markerPosition && (
           <Marker position={markerPosition} icon={customIcon} />
         )}
-      </MapContainer>
+      </MapContainer>      
     </div>
   );
 };
 
-export default BasicMap;
+export default BasicMapWithMarker;

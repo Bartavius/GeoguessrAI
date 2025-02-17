@@ -7,8 +7,11 @@ export default function StreetView() {
   return (
     <div className="street-view-container">
       <div className="street-view-box">
-        fdksjlaflkdsf
       <div className="street-view-embed">
+      <div
+    className="absolute top-0 left-0 bg-red-900 w-full"
+    style={{ zIndex: 10000, height: 100}}
+  ></div>
         <iframe
           width="600"
           height="450"
@@ -22,6 +25,8 @@ export default function StreetView() {
       &pitch=10
       &fov=35`}
         ></iframe>
+      
+       
       </div></div>
     </div>
   );

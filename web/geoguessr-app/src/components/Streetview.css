@@ -7,7 +7,6 @@
 
 .street-view-box .street-view-embed iframe {
     position: absolute;
-    top: -8%;
     height: 100%;
     width: 100%;
 }
