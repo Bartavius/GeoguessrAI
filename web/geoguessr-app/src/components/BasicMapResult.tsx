@@ -11,17 +11,29 @@ const BasicMapResult = ({
   userLng,
   correctLat,
   correctLng,
+  zoom,
 }: {
   userLat: number | null;
   userLng: number | null;
   correctLat: number; // make this not null later
   correctLng: number;
+  zoom: number;
 }) => {
   const userMarkerPosition = { lat: userLat, lng: userLng };
   const correctMarkerPosition = { lat: correctLat, lng: correctLng };
+  const centerPosition =
+    userLat && userLng 
+      ? {
+          lat: (userLat + correctLat) / 2,
+          lng: (userLng + correctLng) / 2,
+        }
+      : {
+          lat: correctLat,
+          lng: correctLng,
+        };
 
-  const [center] = useState(correctMarkerPosition);
-  const ZOOM_LEVEL = 2;
+  const [center] = useState(centerPosition);
+  const ZOOM_LEVEL = zoom;
   const mapRef = useRef(null);
   const ZOOM_DELTA = 2;
   const PX_PER_ZOOM_LEVEL = 2;

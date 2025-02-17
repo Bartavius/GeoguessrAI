@@ -21,6 +21,7 @@ export default function Game() {
     { lat: 42.892982, lng:  -80.465330 },
     { lat: -0.457913, lng: 37.052430 },
     { lat: 1.039672, lng: 121.949726 },
+    { lat: 41.936227, lng: -6.144174 },
   ];
 
   const randomLocation = locations[Math.floor(Math.random() * locations.length)];
@@ -39,18 +40,6 @@ export default function Game() {
       router.push(`/game/result?userLat=null&userLng=null&correctLat=${correctLat}&correctLng=${correctLng}`);
     }
   };
-
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Enter") {
-        submitGuess();
-      }
-    };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
 
   return (
     <div>
