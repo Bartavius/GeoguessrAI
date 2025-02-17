@@ -14,14 +14,14 @@ const BasicMapResult = ({
 }: {
   userLat: number | null;
   userLng: number | null;
-  correctLat: number;
+  correctLat: number; // make this not null later
   correctLng: number;
 }) => {
   const userMarkerPosition = { lat: userLat, lng: userLng };
   const correctMarkerPosition = { lat: correctLat, lng: correctLng };
 
   const [center] = useState(correctMarkerPosition);
-  const ZOOM_LEVEL = 20;
+  const ZOOM_LEVEL = 2;
   const mapRef = useRef(null);
   const ZOOM_DELTA = 2;
   const PX_PER_ZOOM_LEVEL = 2;
