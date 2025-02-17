@@ -1,5 +1,6 @@
 .street-view-box {
-    height: 100vh;
+    height: 93vh;
+    width: 100%;;
     overflow: hidden;
     position: relative;
     

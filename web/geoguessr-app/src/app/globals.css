@@ -55,7 +55,7 @@ body {
 }
 
 .combined-map-container {
-  margin: 5%;
+  top: -5%;
   overflow: hidden;
   position: relative;
 }

@@ -12,8 +12,8 @@ const BasicMapWithMarker = ({setLat, setLng}: {setLat: (n: number) => void, setL
     null
   );
 
-  const [center] = useState({ lat: 44.04901, lng: -73.9647 });
-  const ZOOM_LEVEL = 12;
+  const [center] = useState({ lat: 0, lng: 0 });
+  const ZOOM_LEVEL = 0.5;
   const mapRef = useRef(null);
 
   const customIcon = L.icon({
