@@ -62,7 +62,7 @@ export default function Game() {
 
   return (
     <div>
-      <div className="combined-map-container border-4">
+      <div className="combined-map-container">
         <CombinedMap setLat={setLat} setLng={setLng} lat={correctLat} lng={correctLng}/>
         <button
           onClick={submitGuess}

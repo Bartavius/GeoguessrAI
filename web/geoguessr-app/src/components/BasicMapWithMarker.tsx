@@ -12,7 +12,7 @@ const BasicMapWithMarker = ({setLat, setLng}: {setLat: (n: number) => void, setL
     null
   );
 
-  const [center] = useState({ lat: 0, lng: 0 });
+  const [center] = useState({ lat: 20, lng: 0 });
   const ZOOM_LEVEL = 0.5;
   const mapRef = useRef(null);
 

@@ -67,7 +67,7 @@ export default function Results() {
       Math.pow(correctLngParsed - (userLngParsed ?? 0), 2)
   );
 
-  const zoomLevel = (userLatParsed && userLngParsed ? (200 - (linearDistance < 1 ? -150 : linearDistance)) / 35 : 10)
+  const zoomLevel = (userLatParsed && userLngParsed ? (200 - (linearDistance < 2 ? -linearDistance * 50 : linearDistance)) / 35 : 10)
 
   return (
     <div>
