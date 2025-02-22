@@ -73,27 +73,27 @@ export default function Results() {
       
       <div className="pt-16">
         {!loading && (
+            <div className="container mx-auto">
           <BasicMapResult
             userLat={userLatParsed}
             userLng={userLngParsed}
             correctLat={correctLatParsed}
             correctLng={correctLngParsed}
-          />
+          /></div>
         )}
 
         {userLatParsed && userLngParsed && (
-          <h2 className="text-center text-4xl text-bold mt-4">
+          <h2 className="text-center text-4xl text-bold mt-4 inline">
             <b>Distance: {formatter}</b>
           </h2>
         )}
-      </div>
-
-      <button
+        <button
         onClick={nextGame}
-        className="m-2 mr-5 float-end bg-green-600 pl-40 pr-40 pt-2 pb-2 rounded-full border transition duration-150 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-green-700"
+        className="inline m-2 mr-5 float-end bg-green-600 pl-40 pr-40 pt-2 pb-2 rounded-full border transition duration-150 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-green-700"
       >
         <b>Next Round</b>
       </button>
+      </div>
     </Suspense>
   );
 }
