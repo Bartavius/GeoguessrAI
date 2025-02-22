@@ -1,8 +1,10 @@
 "use client";
 
-import CombinedMap from "@/components/maps/CombinedMap";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import dynamic from "next/dynamic";
+
+const CombinedMap = dynamic(() => import("@/components/maps/CombinedMap"), { ssr: false });
 
 interface location {
   lat: number; 

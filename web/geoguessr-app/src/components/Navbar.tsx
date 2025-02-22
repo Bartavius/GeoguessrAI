@@ -1,15 +1,10 @@
-"use client";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 export default function NavBar() {
   const tabs = [
     { tab: "Singleplayer", link: "/game" },
     { tab: "Login", link: "/login" },
-    { tab: "Contact", link: "/#contact"}
+    { tab: "Contact", link: "/contact"}
   ];
-
-  const router = useRouter();
 
   return (
     <div>
@@ -30,3 +25,4 @@ export default function NavBar() {
     </div>
   );
 }
+
