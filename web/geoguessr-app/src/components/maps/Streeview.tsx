@@ -1,3 +1,4 @@
+import NavBar from "../Navbar";
 import "./Streetview.css";
 
 export default function StreetView({ lat, lng }: { lat: number; lng: number }) {
@@ -9,9 +10,9 @@ export default function StreetView({ lat, lng }: { lat: number; lng: number }) {
       <div className="street-view-box">
         <div className="street-view-embed">
           <div
-            className="absolute top-0 left-0 bg-accent1 w-full"
-            style={{ zIndex: 10000, height: 100 }}
-          ></div>
+            className="absolute top-0 left-0  w-full"
+            style={{ zIndex: 10000, height: 67 }}
+          ><NavBar /></div>
           <iframe
             width="600"
             height="450"
