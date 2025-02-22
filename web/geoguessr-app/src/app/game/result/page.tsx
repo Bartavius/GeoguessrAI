@@ -2,7 +2,8 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import BasicMapResult from "@/components/BasicMapResult";
+import BasicMapResult from "@/components/maps/BasicMapResult";
+import NavBar from "@/components/Navbar";
 
 export default function Results() {
   const searchParams = useSearchParams();
@@ -10,17 +11,17 @@ export default function Results() {
 
   const [userLatParsed, setUserLatParsed] = useState<number | null>(null);
   const [userLngParsed, setUserLngParsed] = useState<number | null>(null);
-  const [correctLatParsed, setCorrectLatParsed] = useState<number>(0); // remove correct coord queries once done testing
+  const [correctLatParsed, setCorrectLatParsed] = useState<number>(0);
   const [correctLngParsed, setCorrectLngParsed] = useState<number>(0);
   const [loading, setLoading] = useState(true);
 
   // testing distance (client side for now)
   function getDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
-    const R = 6371000; // Radius of the Earth in meters
-    const φ1 = lat1 * (Math.PI / 180); // Convert latitude from degrees to radians
-    const φ2 = lat2 * (Math.PI / 180); // Convert latitude from degrees to radians
-    const Δφ = (lat2 - lat1) * (Math.PI / 180); // Difference in latitudes
-    const Δλ = (lon2 - lon1) * (Math.PI / 180); // Difference in longitudes
+    const R = 6371000;
+    const φ1 = lat1 * (Math.PI / 180);
+    const φ2 = lat2 * (Math.PI / 180);
+    const Δφ = (lat2 - lat1) * (Math.PI / 180);
+    const Δλ = (lon2 - lon1) * (Math.PI / 180);
 
     const a =
       Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
@@ -39,8 +40,6 @@ export default function Results() {
     const correctLat = searchParams.get("correctLat");
     const correctLng = searchParams.get("correctLng");
 
-    console.log(`${userLat} ${userLng}`);
-    console.log(`${correctLat} ${correctLat}`);
     setUserLatParsed(userLat ? parseFloat(userLat) : null);
     setUserLngParsed(userLng ? parseFloat(userLng) : null);
     setCorrectLatParsed(correctLat ? parseFloat(correctLat) : 0);
@@ -49,7 +48,7 @@ export default function Results() {
   }, []);
 
   const nextGame = () => {
-    router.push(`/game`); // might need match ID in the future
+    router.push(`/game`);
   };
 
   const meters = getDistance(
@@ -62,34 +61,35 @@ export default function Results() {
   const km = Math.round(meters / 10) / 100;
   const formatter = km > 1 ? `${km} KM` : `${meters} M`;
 
-  const linearDistance = Math.sqrt(
-    Math.pow(correctLatParsed - (userLatParsed ?? 0), 2) +
-      Math.pow(correctLngParsed - (userLngParsed ?? 0), 2)
-  );
-
-  const zoomLevel = (userLatParsed && userLngParsed ? (200 - (linearDistance < 1 ? -150 : linearDistance)) / 35 : 10)
-
   return (
     <div>
-      {!loading && (
-        <BasicMapResult
-          userLat={userLatParsed}
-          userLng={userLngParsed}
-          correctLat={correctLatParsed}
-          correctLng={correctLngParsed}
-          zoom={zoomLevel}
-        />
-      )}
+     
+      <div className="fixed top-0 left-0 w-full z-20">
+        <NavBar />
+      </div>
 
-      {userLatParsed && userLngParsed && (
-        <h2 className="text-center text-4xl text-bold mt-4">
-          <b>Distance: {formatter}</b>
-        </h2>
-      )}
+      
+      <div className="pt-16">
+        {!loading && (
+          <BasicMapResult
+            userLat={userLatParsed}
+            userLng={userLngParsed}
+            correctLat={correctLatParsed}
+            correctLng={correctLngParsed}
+          />
+        )}
 
+        {userLatParsed && userLngParsed && (
+          <h2 className="text-center text-4xl text-bold mt-4">
+            <b>Distance: {formatter}</b>
+          </h2>
+        )}
+      </div>
+
+      {/* Next Round Button */}
       <button
         onClick={nextGame}
-        className=" m-2 mr-5 float-end bg-green-600 pl-40 pr-40 pt-2 pb-2 rounded-full border transition duration-150 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-green-700"
+        className="m-2 mr-5 float-end bg-green-600 pl-40 pr-40 pt-2 pb-2 rounded-full border transition duration-150 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-green-700"
       >
         <b>Next Round</b>
       </button>

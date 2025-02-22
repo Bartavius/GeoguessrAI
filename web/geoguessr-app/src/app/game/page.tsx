@@ -1,6 +1,6 @@
 "use client";
 
-import CombinedMap from "@/components/CombinedMap";
+import CombinedMap from "@/components/maps/CombinedMap";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
