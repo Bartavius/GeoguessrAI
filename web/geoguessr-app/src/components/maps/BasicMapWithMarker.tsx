@@ -6,11 +6,17 @@ import L, { LatLngLiteral } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import osm from "../../utils/leaflet";
 
-const BasicMapWithMarker = ({setLat, setLng}: {setLat: (n: number) => void, setLng: (n: number) => void}) => {
-
+const BasicMapWithMarker = ({
+  setLat,
+  setLng,
+}: {
+  setLat: (n: number) => void;
+  setLng: (n: number) => void;
+}) => {
   const [markerPosition, setMarkerPosition] = useState<LatLngLiteral | null>(
     null
   );
+  const [isHovered, setIsHovered] = useState(false);
 
   const [center] = useState({ lat: 20, lng: 0 });
   const ZOOM_LEVEL = 0.5;
@@ -39,10 +45,29 @@ const BasicMapWithMarker = ({setLat, setLng}: {setLat: (n: number) => void, setL
     return null;
   }
 
+    const handleMouseEnter = () => {
+      setIsHovered(true);
+    };
+
+    const handleMouseLeave = () => {
+      setTimeout(() => {
+        setIsHovered(false);
+      }, 1000);
+    };
+  
 
   return (
-    <div className="leaflet-container-wrapper">
-      <MapContainer center={center} zoom={ZOOM_LEVEL} ref={mapRef} className="leaflet-map">
+    <div
+      className={`leaflet-container-wrapper ${isHovered ? "hovered" : ""}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <MapContainer
+        center={center}
+        zoom={ZOOM_LEVEL}
+        ref={mapRef}
+        className="leaflet-map"
+      >
         <TileLayer
           url={osm.maptiler.url}
           attribution={osm.maptiler.attribution}
@@ -51,7 +76,7 @@ const BasicMapWithMarker = ({setLat, setLng}: {setLat: (n: number) => void, setL
         {markerPosition && (
           <Marker position={markerPosition} icon={customIcon} />
         )}
-      </MapContainer>      
+      </MapContainer>
     </div>
   );
 };

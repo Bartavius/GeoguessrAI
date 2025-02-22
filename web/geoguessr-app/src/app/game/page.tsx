@@ -2,7 +2,7 @@
 
 import CombinedMap from "@/components/maps/CombinedMap";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface location {
   lat: number; 
@@ -75,6 +75,7 @@ export default function Game() {
     { lat: 43.9435158, lng: 12.4448551 },
     { lat: 47.4064937, lng: 8.3974203 },
     { lat: 43.7315207, lng: 7.41717 },
+    { lat: 56.541929, lng: -79.2225907 }
 
   ];
 

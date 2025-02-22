@@ -44,11 +44,12 @@ const BasicMapResult = ({
   return (
     <div className="leaflet-container-result-wrapper">
       <MapContainer
-        center={[userLat ?? correctLat, userLng ?? correctLng]}
         zoomDelta={ZOOM_DELTA}
         wheelPxPerZoomLevel={PX_PER_ZOOM_LEVEL}
         scrollWheelZoom={true}
         className="leaflet-result-map"
+        center={correctMarkerPosition}
+        zoom={7}
       >
         <TileLayer
           url={osm.maptiler.url}
@@ -70,6 +71,7 @@ const BasicMapResult = ({
         )}
 
         {userMarkerPosition.lat && userMarkerPosition.lng && (
+          <div>
           <Polyline
             positions={[
               [userMarkerPosition.lat, userMarkerPosition.lng],
@@ -77,16 +79,18 @@ const BasicMapResult = ({
             ]}
             pathOptions={dottedLine}
           />
-        )}
-
-        <FitBounds
+          <FitBounds
           userLat={userLat ?? 0}
           userLng={userLng ?? 0}
           correctLat={correctLat}
           correctLng={correctLng}
         />
+        </div>
+        
+        )}
+
       </MapContainer>
-    </div>
+      </div>
   );
 };
 
@@ -94,10 +98,10 @@ const BasicMapResult = ({
 export default BasicMapResult;
 
 // sets the bound to include both markers
-const FitBounds = ({ userLat, userLng, correctLat, correctLng }: { userLat: number | null, userLng: number | null, correctLat: number, correctLng: number }) => {
+const FitBounds = ({ userLat, userLng, correctLat, correctLng }: { userLat: number, userLng: number, correctLat: number, correctLng: number }) => {
   const map = useMap();
-
   useEffect(() => {
+    console.log("BOUNDS")
     if (map && userLat && userLng && correctLat && correctLng) {
       const bounds: L.LatLngBoundsExpression = [
         [userLat, userLng],

@@ -3,8 +3,6 @@ import "./Streetview.css";
 
 export default function StreetView({ lat, lng }: { lat: number; lng: number }) {
   const API_KEY = process.env.NEXT_PUBLIC_STREET_VIEW_API;
-  // const lat = 42.345446;
-  // const lng = -71.081856;
   return (
     <div className="street-view-container">
       <div className="street-view-box">
