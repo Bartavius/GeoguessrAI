@@ -11,21 +11,6 @@ export default function NavBar() {
 
   const router = useRouter();
 
-  useEffect(() => {
-    // Check if there's a hash in the URL
-    const hash = window.location.hash.substring(1); // Extract the hash after `#`
-    if (hash) {
-      const section = document.getElementById(hash); // Get the section with the matching ID
-      if (section) {
-        // Smooth scroll to the section
-        window.scrollTo({
-          top: section.offsetTop - 100, // Adjust the offset for the navbar (if necessary)
-          behavior: "smooth",
-        });
-      }
-    }
-  }, []);
-
   return (
     <div>
       <nav className="fixed top-0 left-0 w-full bg-black/30 backdrop-blur-lg shadow-md pb-2">
