@@ -65,15 +65,16 @@ export default function Results() {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
+        <div className="relative">
      
       <div className="fixed top-0 left-0 w-full z-20">
         <NavBar />
       </div>
 
       
-      <div className="pt-16">
+      <div className="pt-16 map-result-container">
         {!loading && (
-            <div className="container mx-auto">
+            <div className="">
           <BasicMapResult
             userLat={userLatParsed}
             userLng={userLngParsed}
@@ -93,7 +94,7 @@ export default function Results() {
       >
         <b>Next Round</b>
       </button>
-      </div>
+      </div></div>
     </Suspense>
   );
 }

@@ -4,10 +4,12 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import dynamic from "next/dynamic";
 
-const CombinedMap = dynamic(() => import("@/components/maps/CombinedMap"), { ssr: false });
+const CombinedMap = dynamic(() => import("@/components/maps/CombinedMap"), {
+  ssr: false,
+});
 
 interface location {
-  lat: number; 
+  lat: number;
   lng: number;
 }
 
@@ -20,8 +22,8 @@ export default function Game() {
     { lat: 14.959757, lng: 101.830178 },
     { lat: -25.356141, lng: 131.049524 },
     { lat: -11.485286, lng: -40.601977 },
-    { lat: 42.892982, lng:  -80.465330 },
-    { lat: -0.457913, lng: 37.052430 },
+    { lat: 42.892982, lng: -80.46533 },
+    { lat: -0.457913, lng: 37.05243 },
     { lat: 1.039672, lng: 121.949726 },
     { lat: 41.936227, lng: -6.144174 },
     { lat: 78.223728, lng: 15.633955 },
@@ -77,11 +79,101 @@ export default function Game() {
     { lat: 43.9435158, lng: 12.4448551 },
     { lat: 47.4064937, lng: 8.3974203 },
     { lat: 43.7315207, lng: 7.41717 },
-    { lat: 56.541929, lng: -79.2225907 }
-
+    { lat: 56.541929, lng: -79.2225907 },
+    { lat: 39.1669836, lng: -86.5759863 },
+    { lat: 41.1046009, lng: -7.8172473 },
+    { lat: 33.1568382, lng: 131.6600038 },
+    { lat: 35.1656159, lng: -82.8389549 },
+    { lat: 48.3187097, lng: 4.574294 },
+    { lat: 48.1923831, lng: 3.6724801 },
+    { lat: 43.1168347, lng: -75.3423353 },
+    { lat: 39.7427785, lng: -89.0280223 },
+    { lat: -4.7953223, lng: -38.9943785 },
+    { lat: 25.5586498, lng: 79.6085616 },
+    { lat: 49.3801173, lng: 32.042061 },
+    { lat: 13.8318029, lng: 101.7107551 },
+    { lat: -36.3089366, lng: 146.6520263 },
+    { lat: -12.1056835, lng: -76.8544031 },
+    { lat: 24.4276404, lng: 118.3131523 },
+    { lat: 46.4983225, lng: 19.5416744 },
+    { lat: 44.5441749, lng: -75.3629807 },
+    { lat: 52.6047788, lng: -1.6589305 },
+    { lat: 42.9524624, lng: -71.5342457 },
+    { lat: 44.2983995, lng: -69.1146177 },
+    { lat: 45.9212799, lng: -119.2896035 },
+    { lat: 45.8813288, lng: 12.4747719 },
+    { lat: 59.1478643, lng: 11.3246936 },
+    { lat: 51.4274578, lng: -0.3125176 },
+    { lat: 49.9155306, lng: 18.3052192 },
+    { lat: 42.562083, lng: 0.5691719 },
+    { lat: 33.7875098, lng: -118.0702205 },
+    { lat: -9.4286195, lng: -38.2286802 },
+    { lat: 62.0557927, lng: 22.0590692 },
+    { lat: 62.917875, lng: 27.67257 },
+    { lat: -27.1505279, lng: 26.3913037 },
+    { lat: 42.2905365, lng: -83.6786424 },
+    { lat: 56.4692132, lng: 16.3951233 },
+    { lat: -32.9280244, lng: 151.6824633 },
+    { lat: 25.5310237, lng: 56.3359142 },
+    { lat: 52.856758, lng: 19.6664674 },
+    { lat: 34.2688786, lng: -118.5175395 },
+    { lat: 27.8671645, lng: -82.0785508 },
+    { lat: 29.0106008, lng: -81.9934159 },
+    { lat: 54.0812635, lng: 11.9780604 },
+    { lat: 34.8371873, lng: -82.2857653 },
+    { lat: 26.5919006, lng: 94.1223263 },
+    { lat: 33.5124711, lng: 133.9502381 },
+    { lat: 22.9558091, lng: 76.0478515 },
+    { lat: 44.2418909, lng: 28.2474979 },
+    { lat: 45.013871, lng: 15.0334374 },
+    { lat: 49.0200952, lng: 104.0436772 },
+    { lat: 34.1184599, lng: -117.6154404 },
+    { lat: 8.2971371, lng: 3.6483709 },
+    { lat: 50.1148318, lng: 14.9737575 },
+    { lat: 47.0358011, lng: 4.5247017 },
+    { lat: 56.5446276, lng: 13.0563469 },
+    { lat: 46.4029099, lng: 26.7141419 },
+    { lat: 42.4134517, lng: 13.8433778 },
+    { lat: -6.1721852, lng: 107.1709696 },
+    { lat: 29.7171719, lng: 77.4691547 },
+    { lat: 39.2338533, lng: -0.4461509 },
+    { lat: 20.2991598, lng: 73.1545604 },
+    { lat: 26.83237, lng: 73.7817024 },
+    { lat: 12.3143912, lng: 75.8748285 },
+    { lat: -9.2096645, lng: -76.1490285 },
+    { lat: 40.0936501, lng: -80.1869273 },
+    { lat: 19.152831, lng: 72.849296 },
+    { lat: 31.1345342, lng: -83.7118899 },
+    { lat: 30.5201998, lng: -86.1302405 },
+    { lat: 25.611574, lng: 73.921594 },
+    { lat: 53.1170731, lng: 9.123263 },
+    { lat: 56.4876314, lng: 26.0377017 },
+    { lat: -3.2326548, lng: -44.3505577 },
+    { lat: 38.9772354, lng: -5.3062544 },
+    { lat: 37.5873296, lng: -1.7407142 },
+    { lat: 47.6305238, lng: 43.1380488 },
+    { lat: 32.0504265, lng: 75.3777084 },
+    { lat: 50.0980566, lng: 21.9495297 },
+    { lat: -26.4020894, lng: -51.1736427 },
+    { lat: 44.3127374, lng: 15.4231316 },
+    { lat: 63.2559241, lng: 17.5617582 },
+    { lat: 49.0924183, lng: 15.2170741 },
+    { lat: 19.257648, lng: -97.2703156 },
+    { lat: -32.1979503, lng: 149.6283189 },
+    { lat: 41.6941782, lng: -79.2551045 },
+    { lat: 35.3370679, lng: 25.1530426 },
+    { lat: 39.098747, lng: -91.1628193 },
+    { lat: -8.3499037, lng: 120.7581137 },
+    { lat: 32.7857543, lng: -103.5053186 },
+    { lat: 36.7862908, lng: 53.1087452 },
+    { lat: 51.6145967, lng: 7.9730278 },
+    { lat: 19.3705393, lng: -100.1480674 },
+    { lat: 55.5628145, lng: 8.7805642 },
+    { lat: 33.65453, lng: -117.3790684 },
   ];
 
-  const randomLocation = locations[Math.floor(Math.random() * locations.length)];
+  const randomLocation =
+    locations[Math.floor(Math.random() * locations.length)];
 
   const [correctLat, setCorrectLat] = useState<number>(randomLocation.lat); //remove random func later once hooked
   const [correctLng, setCorrectLng] = useState<number>(randomLocation.lng);
@@ -92,21 +184,32 @@ export default function Game() {
 
   const submitGuess = () => {
     if (lat !== null && lng !== null) {
-      router.push(`/game/result?userLat=${lat}&userLng=${lng}&correctLat=${correctLat}&correctLng=${correctLng}`); // will remove query for correct location later once peroperly hooked to backend
+      router.push(
+        `/game/result?userLat=${lat}&userLng=${lng}&correctLat=${correctLat}&correctLng=${correctLng}`
+      ); // will remove query for correct location later once peroperly hooked to backend
     } else {
-      router.push(`/game/result?userLat=null&userLng=null&correctLat=${correctLat}&correctLng=${correctLng}`);
+      router.push(
+        `/game/result?userLat=null&userLng=null&correctLat=${correctLat}&correctLng=${correctLng}`
+      );
     }
   };
 
   return (
     <div>
       <div className="combined-map-container">
-        <CombinedMap setLat={setLat} setLng={setLng} lat={correctLat} lng={correctLng}/>
+        {" "}
+        <CombinedMap
+          setLat={setLat}
+          setLng={setLng}
+          lat={correctLat}
+          lng={correctLng}
+        />{" "}
         <button
           onClick={submitGuess}
           className=" mr-5 float-end bg-green-600 pl-40 pr-40 pt-2 pb-2 rounded-full border transition duration-150 ease-in-out hover:bg-green-700"
         >
-          <b>Submit</b>
+          {" "}
+          <b>Submit</b>{" "}
         </button>
       </div>
     </div>
