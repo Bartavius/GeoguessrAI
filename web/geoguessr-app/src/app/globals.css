@@ -36,22 +36,18 @@ body {
 
 
 .leaflet-container-wrapper {
-  width: 500px;
-  height: 300px;
+  width: 52vh; /* 800 */
+  height: 32vh; /* 460 */
   overflow: hidden;
   z-index: 1000;
   transition: transform 0.1s ease-in-out;
   transform-origin: bottom right;
   opacity: 0.6;
+  transform: scale(1); /* scale 0.59 */
 }
 
 .leaflet-container-wrapper.hovered {
-  transform: scaleX(1.7) scaleY(1.7);
-  opacity: 1;
-}
-
-.leaflet-container-wrapper:hover {
-  transform: scaleX(1.7) scaleY(1.7);
+  transform: scaleX(1.7) scaleY(1.7); /* 1.2 instead */
   opacity: 1;
 }
 
@@ -75,14 +71,26 @@ body {
 }
 
 .combined-map-container {
-  top: -5%;
   overflow: hidden;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
+.submit-button:disabled {
+  opacity: 0.5;
+  background: #000 !important;
+}
+
+
 @media (max-width: 720px) {
+  .map-result-container {
+    top: -5vh;
+  }
   .combined-map-container {
     margin: 0%;
+    top: -5vh;
   }
   .leaflet-container-wrapper {
     width: 600px;

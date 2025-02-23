@@ -178,8 +178,6 @@ export default function Game() {
   const [correctLat, setCorrectLat] = useState<number>(randomLocation.lat); //remove random func later once hooked
   const [correctLng, setCorrectLng] = useState<number>(randomLocation.lng);
 
-  console.log(correctLat, correctLng);
-
   const router = useRouter();
 
   const submitGuess = () => {
@@ -187,7 +185,7 @@ export default function Game() {
       router.push(
         `/game/result?userLat=${lat}&userLng=${lng}&correctLat=${correctLat}&correctLng=${correctLng}`
       ); // will remove query for correct location later once peroperly hooked to backend
-    } else {
+    } else { // maybe change this to that if time left == 0, and that if the user lat and user lng doesn't exist then return (avoid inspect)
       router.push(
         `/game/result?userLat=null&userLng=null&correctLat=${correctLat}&correctLng=${correctLng}`
       );
@@ -196,7 +194,7 @@ export default function Game() {
 
   return (
     <div>
-      <div className="combined-map-container">
+      <div className="combined-map-container top-0 left-0 fixed">
         {" "}
         <CombinedMap
           setLat={setLat}
@@ -206,7 +204,9 @@ export default function Game() {
         />{" "}
         <button
           onClick={submitGuess}
-          className=" mr-5 float-end bg-green-600 pl-40 pr-40 pt-2 pb-2 rounded-full border transition duration-150 ease-in-out hover:bg-green-700"
+          disabled={lat && lng ? false : true}
+          style={{zIndex: 10000}}
+          className="submit-button mr-5 float-end bg-green-600 pl-40 pr-40 pt-2 pb-2 rounded-full border transition duration-150 ease-in-out"
         >
           {" "}
           <b>Submit</b>{" "}

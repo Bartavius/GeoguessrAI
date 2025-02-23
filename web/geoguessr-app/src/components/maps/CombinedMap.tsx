@@ -1,5 +1,5 @@
 import BasicMapWithMarker from "./BasicMapWithMarker";
-import StreetView from "./Streeview";
+import StreetView from "./Streetview";
 
 export default function CombinedMap({
   setLat,
@@ -15,7 +15,7 @@ export default function CombinedMap({
   return (
     <div className="map-over-street-view relative">
       <StreetView lat={lat} lng={lng}/> 
-      <div style={{ position: "absolute", bottom: "0.8%", right: "0.8%" }}>
+      <div style={{ position: "absolute", bottom: "1.5%", right: "0.8%" }}>
         <BasicMapWithMarker setLat={setLat} setLng={setLng} />
       </div>
     </div>

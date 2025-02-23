@@ -14,7 +14,8 @@ export default function StreetView({ lat, lng }: { lat: number; lng: number }) {
           <iframe
             width="600"
             height="450"
-            style={{ border: 0 }}
+            className="top-0 left-0 absolute"
+            style={{ border: 0}}
             loading="lazy"
             allowFullScreen
             referrerPolicy="no-referrer-when-downgrade"
