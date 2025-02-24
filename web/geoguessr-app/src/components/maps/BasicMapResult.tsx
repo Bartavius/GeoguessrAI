@@ -109,7 +109,8 @@ const FitBounds = ({ userLat, userLng, correctLat, correctLng }: { userLat: numb
       ];
       map.fitBounds(bounds, 
         {
-          paddingTopLeft: [0, 40]
+          paddingTopLeft: [10, 50],
+          paddingBottomRight: [10, 20]
         }
       );
     }

@@ -72,7 +72,7 @@ export default function Results() {
       </div>
 
       
-      <div className="pt-16 map-result-container">
+      <div className="map-result-container">
         {!loading && (
             <div className="">
           <BasicMapResult
@@ -82,6 +82,7 @@ export default function Results() {
             correctLng={correctLngParsed}
           /></div>
         )}
+        </div>
 
         {userLatParsed && userLngParsed && (
           <h2 className="text-center text-4xl text-bold mt-4 inline">
@@ -95,7 +96,7 @@ export default function Results() {
       >
         <b>Next Round</b>
       </button>
-      </div></div>
+      </div>
     </Suspense>
   );
 }

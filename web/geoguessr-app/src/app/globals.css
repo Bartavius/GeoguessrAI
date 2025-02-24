@@ -68,11 +68,9 @@ body {
 
 .leaflet-container-result-wrapper {
   width: 100%;
-  height: 80vh;
+  height: 92vh;
   overflow: hidden;
   z-index: 1000;
-  transition: transform 0.3s ease-in-out;
-  transform-origin: bottom right;
 }
 
 .leaflet-result-map {
@@ -94,10 +92,16 @@ body {
   cursor:not-allowed;
 }
 
+.map-result-container {
+  position: relative;
+  z-index: 0;
+}
 
 @media (max-width: 720px) {
   .map-result-container {
-    top: -10vh;
+    top: -5vh;
+    z-index: -5;
+    position: relative;
   }
   .combined-map-container {
     margin: 0%;
@@ -117,6 +121,16 @@ body {
   .leaflet-container-wrapper:hover {
     transform: none;
   }
+
+  .leaflet-container-result-wrapper {
+    width: 100%;
+    height: 80vh;
+    overflow: hidden;
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out;
+    transform-origin: bottom right;
+  }
+  
 }
 
 
