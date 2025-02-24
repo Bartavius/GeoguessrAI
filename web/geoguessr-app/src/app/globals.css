@@ -19,7 +19,7 @@
 
 html, body {
   height: 100%;
-  min-height: 100vh;
+  min-height: 100dvh;
   overflow-x: hidden;
 }
 
@@ -36,8 +36,8 @@ body {
 
 
 .leaflet-container-wrapper {
-  width: 52vh; /* 800 */
-  height: 32vh; /* 460 */
+  width: 52dvh; /* 800 */
+  height: 32dvh; /* 460 */
   overflow: hidden;
   z-index: 1000;
   transition: transform 0.1s ease-in-out;
@@ -68,7 +68,7 @@ body {
 
 .leaflet-container-result-wrapper {
   width: 100%;
-  height: 92vh;
+  height: 92dvh;
   overflow: hidden;
   z-index: 1000;
 }
@@ -99,17 +99,16 @@ body {
 
 @media (max-width: 720px) {
   .map-result-container {
-    top: -5vh;
+    top: -5dvh;
     z-index: -5;
     position: relative;
   }
   .combined-map-container {
     margin: 0%;
-    top: -10vh;
   }
   .leaflet-container-wrapper {
-    width: 100vh;
-    height: 30vh;
+    width: 100dvh;
+    height: 30dvh;
     opacity: 1;
   }
 
@@ -124,7 +123,7 @@ body {
 
   .leaflet-container-result-wrapper {
     width: 100%;
-    height: 80vh;
+    height: 90dvh;
     overflow: hidden;
     z-index: 1000;
     transition: transform 0.3s ease-in-out;
