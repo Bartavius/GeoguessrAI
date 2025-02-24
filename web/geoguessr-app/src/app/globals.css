@@ -97,15 +97,15 @@ body {
 
 @media (max-width: 720px) {
   .map-result-container {
-    top: -5vh;
+    top: -10vh;
   }
   .combined-map-container {
     margin: 0%;
-    top: -5vh;
+    top: -10vh;
   }
   .leaflet-container-wrapper {
-    width: 600px;
-    height: 250px;
+    width: 100vh;
+    height: 35vh;
     opacity: 1;
   }
 

@@ -206,7 +206,7 @@ export default function Game() {
           onClick={submitGuess}
           disabled={lat && lng ? false : true}
           style={{zIndex: 10000}}
-          className="submit-button mr-5 float-end bg-green-600 pl-40 pr-40 pt-2 pb-2 rounded-full border transition duration-150 ease-in-out"
+          className="mb-12 submit-button mr-5 float-end bg-green-600 pl-40 pr-40 pt-2 pb-2 rounded-full border transition duration-150 ease-in-out"
         >
           {" "}
           <b>Submit</b>{" "}
