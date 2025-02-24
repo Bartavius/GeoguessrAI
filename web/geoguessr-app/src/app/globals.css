@@ -51,9 +51,14 @@ body {
   opacity: 1;
 }
 
+
 .leaflet-container-wrapper:hover {
   transform: scaleX(1.7) scaleY(1.7); /* 1.2 instead */
   opacity: 1;
+}
+
+.leaflet-control-attribution {
+  font-size: 0.5rem !important;
 }
 
 .leaflet-map {

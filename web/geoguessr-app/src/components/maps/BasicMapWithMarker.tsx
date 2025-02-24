@@ -71,6 +71,8 @@ const BasicMapWithMarker = ({
         <TileLayer
           url={osm.maptiler.url}
           attribution={osm.maptiler.attribution}
+          tileSize={256}
+          detectRetina={true} className="leaflet-control-attribution"
         />
         <LocationMarker setMarkerPosition={setMarkerPosition} />
         {markerPosition && (
