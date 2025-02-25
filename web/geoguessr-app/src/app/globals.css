@@ -5,7 +5,7 @@
 
 
 :root {
-  --background: #16021d;
+  --background: #1b0124;
   --foreground: #ffffff;
   --color-accent1: #4d09b3;
 }
@@ -121,8 +121,6 @@ body {
 @media (max-width: 720px) {
   .map-result-container {
     top: -5vh;
-    z-index: -5;
-    position: relative;
   }
   .combined-map-container {
     margin: 0%;

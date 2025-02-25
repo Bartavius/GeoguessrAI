@@ -6,7 +6,10 @@ import { Suspense } from "react";
 import NavBar from "@/components/Navbar";
 import dynamic from "next/dynamic";
 
-const BasicMapResult = dynamic(() => import("@/components/maps/BasicMapResult"), { ssr: false });
+const BasicMapResult = dynamic(
+  () => import("@/components/maps/BasicMapResult"),
+  { ssr: false }
+);
 
 export default function Results() {
   const searchParams = useSearchParams();
@@ -65,37 +68,35 @@ export default function Results() {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-        <div className="relative">
-     
-      <div className="fixed top-0 left-0 w-full z-20">
-        <NavBar />
-      </div>
-
-      
-      <div className="map-result-container">
-        {!loading && (
-            <div className="">
-          <BasicMapResult
-            userLat={userLatParsed}
-            userLng={userLngParsed}
-            correctLat={correctLatParsed}
-            correctLng={correctLngParsed}
-          /></div>
-        )}
+      <div className="relative">
+        <div className="fixed top-0 left-0 w-full z-20">
+          <NavBar />
         </div>
 
+        <div className="map-result-container">
+          {!loading && (
+            <div className="">
+              <BasicMapResult
+                userLat={userLatParsed}
+                userLng={userLngParsed}
+                correctLat={correctLatParsed}
+                correctLng={correctLngParsed}
+              />
+            </div>
+          )}
+        </div>
         {userLatParsed && userLngParsed && (
           <h2 className="text-center text-4xl text-bold mt-1 inline">
             <b>Distance: {formatter}</b>
           </h2>
         )}
         <button
-        onClick={nextGame}
-        style={{zIndex: 10000}}
-        className="inline m-2 mr-5 float-end bg-green-600 pl-40 pr-40 pt-2 pb-2 rounded-full border transition duration-150 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-green-700"
-      >
-        <b>Next Round</b>
-      </button>
+          onClick={nextGame}
+          style={{ zIndex: 10000 }}
+          className="inline m-2 mr-5 float-end bg-green-600 pl-40 pr-40 pt-2 pb-2 rounded-full border transition duration-150 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-green-700"
+        >
+          <b>Next Round</b>
+        </button>
       </div>
     </Suspense>
   );
