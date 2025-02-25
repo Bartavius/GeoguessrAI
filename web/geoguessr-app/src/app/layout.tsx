@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: "Plonk Stars",
   description: "Find out where you are in the world",
   icons: {
-    icon: "/user-marker.webp",
+    icon: "/PlonkStarsMarker.png",
   },
 };
 
