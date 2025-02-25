@@ -23,9 +23,9 @@ const BasicMapWithMarker = ({
   const mapRef = useRef(null);
 
   const customIcon = L.icon({
-    iconUrl: "/user-marker.webp",
-    iconSize: [25, 25],
-    iconAnchor: [12.5, 25],
+    iconUrl: "/PlonkStarsAvatar.png",
+    iconSize: [20, 30],
+    iconAnchor: [10, 32],
   });
 
   interface LocationMarkerProps {

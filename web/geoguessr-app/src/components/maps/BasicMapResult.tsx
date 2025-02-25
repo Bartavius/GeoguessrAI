@@ -24,14 +24,14 @@ const BasicMapResult = ({
   const PX_PER_ZOOM_LEVEL = 2;
 
   const userIcon = L.icon({
-    iconUrl: "/user-marker.webp",
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
+    iconUrl: "/PlonkStarsAvatar.png",
+    iconSize: [20, 30],
+    iconAnchor: [10, 30],
   });
   const correctIcon = L.icon({
-    iconUrl: "/correctIcon.png",
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
+    iconUrl: "/PlonkStarsMarker.png",
+    iconSize: [20, 30],
+    iconAnchor: [10, 30],
   });
 
   const dottedLine = {
@@ -101,7 +101,6 @@ export default BasicMapResult;
 const FitBounds = ({ userLat, userLng, correctLat, correctLng }: { userLat: number, userLng: number, correctLat: number, correctLng: number }) => {
   const map = useMap();
   useEffect(() => {
-    console.log("BOUNDS")
     if (map && userLat && userLng && correctLat && correctLng) {
       const bounds: L.LatLngBoundsExpression = [
         [userLat, userLng],
