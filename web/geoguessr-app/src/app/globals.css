@@ -10,13 +10,6 @@
   --color-accent1: #4d09b3;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #1d1d2c;
-    --foreground: #ededed;
-  }
-}
-
 html, body {
   height: 100%;
   min-height: 100vh;
