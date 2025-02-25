@@ -2,7 +2,10 @@
 
 import { useRouter } from "next/navigation";
 import NavBar from "@/components/Navbar";
-import { useEffect } from "react";
+import Contacts from "./Contacts";
+import { Sigmar } from "next/font/google";
+
+const sigmar = Sigmar({ subsets: ["latin"], weight: "400" });
 
 export default function Home() {
   const router = useRouter();
@@ -23,11 +26,11 @@ export default function Home() {
       >
         {/* Logo goes here */}
 
-        <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
-          Plonk Stars
+        <h1 className={`${sigmar.className} font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl`}>
+          <span className="text-red-500">Plonk</span> Stars
         </h1>
         <button
-          className="bg-green-600 px-8 sm:px-16 md:px-32 lg:px-48 py-3 sm:py-4 md:py-5 rounded-full border-4 hover:bg-green-500 transition transform duration-300 text-lg sm:text-xl md:text-2xl lg:text-3xl hover:scale-105 active:scale-100 active:bg-green-800"
+          className={`${sigmar.className} start-button text-2xl`}
           onClick={navigateToGame}
         >
           Start
@@ -52,9 +55,11 @@ export default function Home() {
       <div id="contact" className="bg-[#5000ca] w-full min-h-screen -mt-2 transition ease-in-out">
         <div className="mt-16">
           <div className="p-12">
-            <span className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+            <span className={`${sigmar.className} font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl`}>
               Who we are
             </span>
+            
+            <Contacts />
           </div>
         </div>
       </div>

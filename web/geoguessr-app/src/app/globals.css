@@ -34,6 +34,10 @@ body {
   font-family: 'Poppins', Arial, Helvetica, sans-serif;
 }
 
+.contacts-container {
+  padding-top: 5dvh;
+}
+
 
 .leaflet-container-wrapper {
   width: 52vh; /* 800 */
@@ -84,6 +88,30 @@ body {
   top: 0;
   left: 0;
   width: 100%;
+}
+
+.start-button {
+  width: 35%;
+  background: linear-gradient(
+    to right,
+    rgb(194, 93, 241),
+    rgb(69, 3, 126)
+  );
+  background-size: 200% auto;
+  background-position: left center;
+  color: #ffffff;
+  font-weight: 500;
+  padding: 1rem 2rem;
+  margin-bottom: 1rem;
+  border-width: 5px;
+  border-color: #7d47bf;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: background-position 0.5s ease;
+}
+
+.start-button:hover {
+  background-position: right center;
 }
 
 .submit-button:disabled {

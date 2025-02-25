@@ -85,7 +85,7 @@ export default function Results() {
         </div>
 
         {userLatParsed && userLngParsed && (
-          <h2 className="text-center text-4xl text-bold mt-4 inline">
+          <h2 className="text-center text-4xl text-bold mt-1 inline">
             <b>Distance: {formatter}</b>
           </h2>
         )}
