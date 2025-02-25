@@ -25,13 +25,13 @@ const BasicMapResult = ({
 
   const userIcon = L.icon({
     iconUrl: "/PlonkStarsAvatar.png",
-    iconSize: [20, 30],
-    iconAnchor: [10, 30],
+    iconSize: [25, 40],
+    iconAnchor: [12.5, 40],
   });
   const correctIcon = L.icon({
     iconUrl: "/PlonkStarsMarker.png",
-    iconSize: [20, 30],
-    iconAnchor: [10, 30],
+    iconSize: [25, 40],
+    iconAnchor: [12.5, 40],
   });
 
   const dottedLine = {

@@ -24,8 +24,8 @@ const BasicMapWithMarker = ({
 
   const customIcon = L.icon({
     iconUrl: "/PlonkStarsAvatar.png",
-    iconSize: [20, 30],
-    iconAnchor: [10, 32],
+    iconSize: [15, 25],
+    iconAnchor: [9, 30],
   });
 
   interface LocationMarkerProps {
