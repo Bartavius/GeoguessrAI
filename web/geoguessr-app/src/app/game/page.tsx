@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 
 const CombinedMap = dynamic(() => import("@/components/maps/CombinedMap"), {
@@ -191,6 +191,22 @@ export default function Game() {
       );
     }
   };
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      console.log("Submitting with ", lat, lng, correctLat, correctLng);
+      if (event.code === "Space") {
+        event.preventDefault();
+        submitGuess();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [lat, lng]);
 
   return (
     <div>
