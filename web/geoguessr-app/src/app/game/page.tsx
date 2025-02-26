@@ -194,8 +194,7 @@ export default function Game() {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      console.log("Submitting with ", lat, lng, correctLat, correctLng);
-      if (event.code === "Space") {
+      if (lat && lng && event.code === "Space") {
         event.preventDefault();
         submitGuess();
       }

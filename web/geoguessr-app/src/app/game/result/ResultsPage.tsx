@@ -50,6 +50,19 @@ export default function Results() {
     setCorrectLatParsed(correctLat ? parseFloat(correctLat) : 0);
     setCorrectLngParsed(correctLng ? parseFloat(correctLng) : 0);
     setLoading(false);
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.code === "Space") {
+        event.preventDefault();
+        nextGame();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   const nextGame = () => {
