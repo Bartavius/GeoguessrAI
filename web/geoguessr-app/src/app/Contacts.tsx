@@ -14,7 +14,7 @@ export default function Contacts() {
       name: `Bart Lojanarungsiri`,
       title: "Full-stack Developer",
       image: "profile/bart.png",
-      body: "Bart played Geoguessr so much he can probably guess where you are by looking at the dirt.",
+      body: "Bart plays Plonkstars so much he can probably guess where you are by looking at the dirt.",
       linkedin: "https://linkedin.com/in/jlojanarungsiri",
       github: "https://github.com/Bartavius",
     },

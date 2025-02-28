@@ -132,13 +132,17 @@ body {
     opacity: 1;
   }
 
-  .leaflet-container-wrapper.hovered {
-    transform: scale(1);
-    opacity: 1;
-  }
-
   .leaflet-container-wrapper:hover {
     transform: none;
+  }
+
+  @keyframes stagnant-hover {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    
+
   }
 
   .leaflet-container-result-wrapper {

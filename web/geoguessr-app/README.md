@@ -1,4 +1,8 @@
 Things to fix:
 
-make sure map is not scrollable to "peak" at location
-add div on top of minimap to prevent autoclick
+some things to be done,
+- adding menu buttons on profile screens
+- preventing image stretches in contacts
+- add contacts navigation
+- add footer and also prevent scrolling off of the component
+- look into ways to draw the polyline and marker on the same map (even if user scrolls to another map)

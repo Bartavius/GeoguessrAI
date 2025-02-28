@@ -38,7 +38,7 @@ export default function ProfileCard({
               <span>LinkedIn</span>
             </button>
           </a>
-          <a href={github} target="_blank" className="flex items-center ml-1">
+          <a href={github} target="_blank" className="ml-1">
             <button className="flex items-center space-x-2">
               <FaGithub className="text-2xl" />
               <span>GitHub</span>
