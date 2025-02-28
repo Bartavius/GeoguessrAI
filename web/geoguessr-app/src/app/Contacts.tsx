@@ -1,4 +1,4 @@
-import ProfileCard from "@/components/ProfileCard";
+import ProfileCard from "@/components/profileCard/ProfileCard";
 
 export default function Contacts() {
   const persons = [

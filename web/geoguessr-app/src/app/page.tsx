@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import NavBar from "@/components/Navbar";
 import Contacts from "./Contacts";
 import { Sigmar } from "next/font/google";
+import Footer from "@/components/footer/Footer";
 
 const sigmar = Sigmar({ subsets: ["latin"], weight: "400" });
 
@@ -63,6 +64,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
