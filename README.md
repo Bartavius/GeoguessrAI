@@ -1,8 +1,2 @@
-Things to fix:
-
-some things to be done,
-- adding menu buttons on profile screens
-- preventing image stretches in contacts
-- add contacts navigation
-- add footer and also prevent scrolling off of the component
-- look into ways to draw the polyline and marker on the same map (even if user scrolls to another map)
+## Notice
+This repository is currently broken after uploading 2GB worth of dataset. As such, please visit https://github.com/Bartavius/Plonkstars for the most up-to-date commits. However, the website plonkstars.vercel.app is available and functional (it's now deploying from Plonkstars repository).
